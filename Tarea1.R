@@ -28,6 +28,21 @@ med(show2)
 dum<-data$V5[2:length(data$V5)]
 z<-as.numeric(as.character(dum))*24*3600
 date<-function(x){as.POSIXct('1858-11-17',tz='UTC')+x}
-dum2<-date(z)
-dum<-append("GMT",dum2)
-data2<-cbind(data,dum)
+print("Las fechas en GMT")
+V10<-append("GMT",as.character(date(z)))
+V11<-append("posix",date(z))
+data2<-cbind(data,V10,V11)
+#sd<-as.POSIXlt(date(z))$mon
+#sd
+#as.POSIXlt(data2[2:53,11])
+evt_month<-function(dat,mes){
+  dum<-dat$V5[2:length(dat$V5)]
+  z<-as.numeric(as.character(dum))*24*3600
+  d2<-as.POSIXlt(date(z))$mon
+  d3<-as.POSIXlt(date(z))$year
+  d3<-d3[d2==mes-1]
+  return(table(d3))
+}
+evs<-evt_month(data2,4)
+dum<-as.numeric(as.character(evs))==max(evs)
+names(unclass(evs))[dum]
