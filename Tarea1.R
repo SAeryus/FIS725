@@ -9,4 +9,7 @@ data<-data[complete.cases(data),]  ##Eliminar los datos incompletos
 data[30:36,]
 y<-summary(data$V9)
 str(y)
-names(y)[y>1]
+tll<-names(y)[y>1]
+show<-data[data$V9==tll[1],]
+trck<-data[data$V9==tll[2],]
+trck
