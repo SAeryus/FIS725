@@ -25,3 +25,9 @@ med(trck2)
 print("La media de los showers es")
 mean(show2)
 med(show2)
+dum<-data$V5[2:length(data$V5)]
+z<-as.numeric(as.character(dum))*24*3600
+date<-function(x){as.POSIXct('1858-11-17',tz='UTC')+x}
+dum2<-date(z)
+dum<-append("GMT",dum2)
+data2<-cbind(data,dum)
